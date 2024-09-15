@@ -7,7 +7,7 @@
     const { data: propsData, children} = $props()
 
 	const { supabase, session } = propsData;
-	let loggedIn = session !== null;
+	let loggedIn = $derived(session);
 	onMount(() => {
 		const { data } = supabase.auth.onAuthStateChange((event, newSession) => {
 			if (newSession?.expires_at !== session?.expires_at) {
@@ -21,7 +21,9 @@
 <svelte:head>
 	<title>PokeyPrac</title>
 </svelte:head>
-<Navbar {loggedIn}/>
-<div class="container" style="padding: 50px 0 100px 0">
-{@render children()}
+<div style="min-h-max">
+	<Navbar {loggedIn}/>
+	<div class="container" style="padding: 50px 0 100px 0">
+	{@render children()}
+	</div>
 </div>

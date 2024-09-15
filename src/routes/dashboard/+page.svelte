@@ -1,11 +1,10 @@
 <script lang="ts">
     import type { PageData } from "../$types";
     const { data } = $props();
-    let message = $derived(data.props.message);
     // your script goes here
 </script>
 <h1>
-    Hello!
+    Hello from dashboard! looks pretty empty to me....
 </h1>
 
 <style>

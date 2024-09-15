@@ -1,9 +1,14 @@
 // src/hooks.server.ts
 import { PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY } from '$env/static/public'
 import { createServerClient } from '@supabase/ssr'
+import { redirect } from '@sveltejs/kit'
 import type { Handle } from '@sveltejs/kit'
 
 export const handle: Handle = async ({ event, resolve }) => {
+  //Protected routes...
+  const protectedRoutes = ['/dashboard', '/practice'];
+
+  //Supabase client
   event.locals.supabase = createServerClient(PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY, {
     cookies: {
       getAll: () => event.cookies.getAll(),
@@ -19,6 +24,7 @@ export const handle: Handle = async ({ event, resolve }) => {
       },
     },
   })
+  //Supabase session stuff (auth)
 
   /**
    * Unlike `supabase.auth.getSession()`, which returns the session _without_
@@ -45,6 +51,14 @@ export const handle: Handle = async ({ event, resolve }) => {
     return { session, user }
   }
 
+
+  // List of protected routes
+  const { session } = await event.locals.safeGetSession();
+  if (protectedRoutes.includes(event.url.pathname) && !session) {
+      throw redirect(302, '/');
+  }
+
+  //Return stuff to locals
   return resolve(event, {
     filterSerializedResponseHeaders(name) {
       return name === 'content-range' || name === 'x-supabase-api-version'

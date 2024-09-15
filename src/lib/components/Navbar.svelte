@@ -7,7 +7,8 @@
     <div class="flex">
         <div> PokeyPrac </div>
         {#if loggedIn}
-            <a href="dashboard"> dashboard </a>
+            <a href="dashboard" data-sveltekit-preload-data> dashboard </a>
+            <a href="practice" data-sveltekit-preload-data> practice </a>
         {/if}
     </div>
     <!-- Right side -->
@@ -15,7 +16,7 @@
         {#if loggedIn}
             <a href="auth/logout"> logout </a>
         {:else}
-            <a href="auth/login"> login </a>
+            <a href="auth/login/twitch"> login </a>
         {/if}
     </div>
 </div>

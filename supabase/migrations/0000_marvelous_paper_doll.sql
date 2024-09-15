@@ -1,26 +1,28 @@
 CREATE TABLE IF NOT EXISTS "game_levels" (
-	"id" serial PRIMARY KEY NOT NULL,
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"game_id" serial NOT NULL,
 	"level_name" varchar(255) NOT NULL,
-	"level_description" text
+	"level_description" text,
+	"enabled" boolean DEFAULT true NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "game_objectives" (
-	"id" serial PRIMARY KEY NOT NULL,
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"level_id" serial NOT NULL,
 	"objective_name" varchar(255) NOT NULL,
-	"objective_description" text
+	"objective_description" text,
+	"enabled" boolean DEFAULT true NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "games" (
-	"id" serial PRIMARY KEY NOT NULL,
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"game_name" varchar(255),
 	"game_description" text,
 	"enabled" boolean DEFAULT true NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "user_objectives" (
-	"id" uuid PRIMARY KEY NOT NULL,
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"user_id" uuid,
 	"objective_id" serial NOT NULL,
 	"streak_length" integer,
@@ -31,7 +33,7 @@ CREATE TABLE IF NOT EXISTS "user_objectives" (
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "user_profiles" (
-	"id" uuid PRIMARY KEY NOT NULL,
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"user_id" uuid,
 	"user_avatar_url" varchar(255),
 	"user_bio" text,

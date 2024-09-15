@@ -1,14 +1,8 @@
-import type {PageServerLoad} from '$lib/types';
+import type {PageServerLoad} from './$types';
 import { redirect } from '@sveltejs/kit';
 
-export const load: PageServerLoad = async ({locals}) => {
-    if(!locals.user) {
-        redirect(307,'/')
+export const load: PageServerLoad = async ({ locals: { safeGetSession }, cookies }) => {
+    return {
+        message: "Hello from server"
     }
-    console.log("hello from server");
-  return {
-    props: {
-        message: "hello from server"
-    }
-  };
 };

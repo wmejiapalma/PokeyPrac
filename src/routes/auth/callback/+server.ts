@@ -1,5 +1,4 @@
 import { redirect } from '@sveltejs/kit';
-import type { Actions } from './$types';
 import { supabase } from '$lib/supabaseClient';
 
 export const GET = async (event) => {
@@ -13,7 +12,7 @@ export const GET = async (event) => {
   if (code) {
     const { error } = await supabase.auth.exchangeCodeForSession(code)
     if (!error) {
-      throw redirect(303, `/${next.slice(1)}`);
+      throw redirect(303, `/${next.slice(1)}dashboard`);
     }
   }
 
