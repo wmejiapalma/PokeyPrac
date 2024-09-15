@@ -1,0 +1,185 @@
+{
+  "nodes": [
+    {
+      "id": "05371c7e5c9434ad",
+      "type": "group",
+      "styleAttributes": {},
+      "x": -580,
+      "y": 60,
+      "width": 502,
+      "height": 340,
+      "color": "#8d3eb1",
+      "label": "User Tables"
+    },
+    {
+      "id": "41ee473cc760691b",
+      "type": "group",
+      "styleAttributes": {},
+      "x": -400,
+      "y": -100,
+      "width": 467,
+      "height": 90,
+      "label": "Game Data Tables"
+    },
+    {
+      "id": "70ed56beb481dbe8",
+      "type": "text",
+      "text": "Games",
+      "styleAttributes": {
+        "textAlign": "center",
+        "shape": null
+      },
+      "x": -83,
+      "y": -80,
+      "width": 130,
+      "height": 50
+    },
+    {
+      "id": "9138426ebfe2b4e5",
+      "type": "text",
+      "text": "Objectives",
+      "styleAttributes": {
+        "textAlign": "center",
+        "shape": null
+      },
+      "x": -380,
+      "y": -80,
+      "width": 140,
+      "height": 50
+    },
+    {
+      "id": "b75cb181028ce586",
+      "type": "text",
+      "text": "Levels",
+      "styleAttributes": {
+        "textAlign": "center",
+        "shape": null
+      },
+      "x": -220,
+      "y": -80,
+      "width": 121,
+      "height": 50
+    },
+    {
+      "id": "2570189529dc59cb",
+      "type": "text",
+      "text": "User",
+      "styleAttributes": {},
+      "x": -247,
+      "y": 180,
+      "width": 108,
+      "height": 60
+    },
+    {
+      "id": "7f57f42fff4fdf3f",
+      "type": "text",
+      "text": "Profiles",
+      "styleAttributes": {},
+      "x": -500,
+      "y": 320,
+      "width": 120,
+      "height": 60
+    },
+    {
+      "id": "3151e81e1e9348f5",
+      "type": "text",
+      "text": "Avatar",
+      "styleAttributes": {
+        "textAlign": "center",
+        "border": null
+      },
+      "x": -253,
+      "y": 320,
+      "width": 120,
+      "height": 60
+    },
+    {
+      "id": "ac3dff1454f387d2",
+      "type": "file",
+      "file": "PokeyPrac/Technical Documents/Definitions/Table Definitions.md",
+      "styleAttributes": {},
+      "x": -1000,
+      "y": -140,
+      "width": 400,
+      "height": 400
+    },
+    {
+      "id": "575db87dd1fffa7d",
+      "type": "text",
+      "text": "User_Objectives",
+      "styleAttributes": {},
+      "x": -500,
+      "y": 80,
+      "width": 240,
+      "height": 60
+    },
+    {
+      "id": "c97b3a4303f9f3fd",
+      "type": "file",
+      "file": "PokeyPrac/Technical Documents/Definitions/Word Definitions.md",
+      "styleAttributes": {},
+      "x": 20,
+      "y": 60,
+      "width": 360,
+      "height": 400
+    }
+  ],
+  "edges": [
+    {
+      "id": "384cc8835c57ab51",
+      "fromNode": "70ed56beb481dbe8",
+      "fromSide": "left",
+      "toNode": "b75cb181028ce586",
+      "toSide": "right"
+    },
+    {
+      "id": "83cfe91a56303eeb",
+      "fromNode": "b75cb181028ce586",
+      "fromSide": "left",
+      "toNode": "9138426ebfe2b4e5",
+      "toSide": "right"
+    },
+    {
+      "id": "339111bee6164abb",
+      "fromNode": "2570189529dc59cb",
+      "fromSide": "left",
+      "toNode": "7f57f42fff4fdf3f",
+      "toSide": "top",
+      "label": "user_id"
+    },
+    {
+      "id": "6efea292de6176ca",
+      "fromNode": "2570189529dc59cb",
+      "fromSide": "top",
+      "toNode": "575db87dd1fffa7d",
+      "toSide": "right",
+      "label": "user_id"
+    },
+    {
+      "id": "9cc951764222c296",
+      "styleAttributes": {},
+      "fromNode": "2570189529dc59cb",
+      "fromSide": "bottom",
+      "toNode": "3151e81e1e9348f5",
+      "toSide": "top"
+    },
+    {
+      "id": "e607a090384a6a27",
+      "styleAttributes": {},
+      "fromNode": "3151e81e1e9348f5",
+      "fromSide": "left",
+      "toNode": "7f57f42fff4fdf3f",
+      "toSide": "right",
+      "label": "avatar_id"
+    },
+    {
+      "id": "8cb7876d1a3d049d",
+      "fromNode": "9138426ebfe2b4e5",
+      "fromSide": "bottom",
+      "toNode": "575db87dd1fffa7d",
+      "toSide": "top",
+      "label": "objective_id"
+    }
+  ],
+  "metadata": {}
+}

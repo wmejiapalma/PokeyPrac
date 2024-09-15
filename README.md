@@ -50,4 +50,4 @@ npm run build
 
 ## Documentation
 
-Project documents are available in the `/docs` folder for more information.
+Project documents are available in the `/docs` folder for more information. These files were created using obsidian.md. Files that contain .canvas may need obsidian to open them
