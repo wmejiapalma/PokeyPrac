@@ -1,7 +1,8 @@
 import { z } from 'zod';
 
 export const objectiveFormSchema = z.object({
-    objective_id: z.string(),
+    id: z.string().optional(),
+    objective_id: z.number(), //Id is a number
     streak_length: z.number().optional(),
     time: z.string().optional(),
     user_notes: z.string().optional()

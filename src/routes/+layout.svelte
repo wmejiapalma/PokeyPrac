@@ -1,28 +1,30 @@
-<!-- src/routes/+layout.svelte -->
-<script lang="ts">
-	import '../styles.css'
-	import { invalidate } from '$app/navigation'
-	import { onMount } from 'svelte'
-    import Navbar from '$lib/components/Navbar.svelte';
-    const { data: propsData, children} = $props()
+<script>
+import "../app.css";
+import '../styles.css'
+import {ModeWatcher} from 'mode-watcher';
+import { invalidate } from '$app/navigation'
+import { onMount } from 'svelte'
+import Navbar from '$lib/components/Navbar.svelte';
+const { data: propsData, children} = $props()
 
-	const { supabase, session } = propsData;
-	let loggedIn = $derived(session);
-	onMount(() => {
-		const { data } = supabase.auth.onAuthStateChange((event, newSession) => {
-			if (newSession?.expires_at !== session?.expires_at) {
-				invalidate('supabase:auth')
-			}
-		})
-		return () => data.subscription.unsubscribe()
-	})
-</script>
+const { supabase, session } = propsData;
+let loggedIn = $derived(session);
+onMount(() => {
+    const { data } = supabase.auth.onAuthStateChange((event, newSession) => {
+        if (newSession?.expires_at !== session?.expires_at) {
+            invalidate('supabase:auth')
+        }
+    })
+    return () => data.subscription.unsubscribe()
+})</script><!-- src/routes/+layout.svelte -->
+
 
 <svelte:head>
 	<title>PokeyPrac</title>
 </svelte:head>
 <div style="min-h-max">
-	<Navbar {loggedIn}/>
+    <ModeWatcher defaultMode = {"dark"}/>
+	<Navbar {loggedIn}></Navbar>
 	<div class="container" style="padding: 50px 0 100px 0">
 	{@render children()}
 	</div>

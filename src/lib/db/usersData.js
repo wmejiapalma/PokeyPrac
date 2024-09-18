@@ -14,7 +14,5 @@ export async function getUserObjectives(userId){
 
 export async function createUserObjective(objective){
     const res = await db.insert(user_objectives).values(objective);
-    console.log(res);
     return res;
-    
 }

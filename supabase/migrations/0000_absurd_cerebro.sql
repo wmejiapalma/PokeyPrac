@@ -1,21 +1,21 @@
 CREATE TABLE IF NOT EXISTS "game_levels" (
-	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
-	"game_id" serial NOT NULL,
+	"id" integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY (sequence name "game_levels_id_seq" INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START WITH 1 CACHE 1),
+	"game_id" integer,
 	"level_name" varchar(255) NOT NULL,
 	"level_description" text,
 	"enabled" boolean DEFAULT true NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "game_objectives" (
-	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
-	"level_id" serial NOT NULL,
+	"id" integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY (sequence name "game_objectives_id_seq" INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START WITH 1 CACHE 1),
+	"level_id" integer NOT NULL,
 	"objective_name" varchar(255) NOT NULL,
 	"objective_description" text,
 	"enabled" boolean DEFAULT true NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "games" (
-	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"id" integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY (sequence name "games_id_seq" INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START WITH 1 CACHE 1),
 	"game_name" varchar(255),
 	"game_description" text,
 	"enabled" boolean DEFAULT true NOT NULL
@@ -24,9 +24,9 @@ CREATE TABLE IF NOT EXISTS "games" (
 CREATE TABLE IF NOT EXISTS "user_objectives" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"user_id" uuid,
-	"objective_id" serial NOT NULL,
+	"objective_id" integer NOT NULL,
 	"streak_length" integer,
-	"time" integer,
+	"time" interval,
 	"date_created" timestamp DEFAULT now() NOT NULL,
 	"is_enabled" text DEFAULT 'true' NOT NULL,
 	"user_notes" text

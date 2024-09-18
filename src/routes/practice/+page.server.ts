@@ -1,13 +1,14 @@
-import { fail, type Actions } from "@sveltejs/kit";
+import { fail, redirect, type Actions } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
 import { getUserObjectives, createUserObjective } from "$lib/db/usersData";
 import { superValidate } from "sveltekit-superforms";
 import { objectiveFormSchema} from "./schema";
 import { zod } from "sveltekit-superforms/adapters";
-import { getGameLevels } from "$lib/db/gameData";
+import { getGameLevels, getGameObjectives } from "$lib/db/gameData";
+import { invalidateAll } from "$app/navigation";
 
 export const load: PageServerLoad = async ({locals: {safeGetSession}, cookies }) => {
-    let defaultGame = 1;
+    let defaultGame = "1";
     
     //Get who the user is
     const userSession= await safeGetSession()
@@ -16,12 +17,16 @@ export const load: PageServerLoad = async ({locals: {safeGetSession}, cookies })
     //Get the data we need to present before the page is loaded
     const userObjectives = await getUserObjectives(userId);
     const gameLevels = await getGameLevels(defaultGame);
+    const gameObjectives = await getGameObjectives(defaultGame);
 
     //Get the form the user will interact with
     const form = await superValidate(zod(objectiveFormSchema));
     return {
+        game: {
+            gameLevels,
+            gameObjectives
+        },
         userObjectives,
-        gameLevels,
         form
     }
 };
@@ -43,7 +48,8 @@ export const actions: Actions = {
             user_id: session.user.id,
             ...form.data
         }
-        createUserObjective(objective);
+        let res = await createUserObjective(objective);
+        console.log(res);
     },
     update: async({cookies, request}) =>{
 

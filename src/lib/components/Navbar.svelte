@@ -1,4 +1,7 @@
 <script>
+    import { toggleMode } from 'mode-watcher';
+    import Button from "./ui/button/button.svelte";
+
     export let loggedIn;
 </script>
 
@@ -19,4 +22,5 @@
             <a href="auth/login/twitch"> login </a>
         {/if}
     </div>
+    <Button onclick={toggleMode} />
 </div>
