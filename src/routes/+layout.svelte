@@ -22,9 +22,9 @@ onMount(() => {
 <svelte:head>
 	<title>PokeyPrac</title>
 </svelte:head>
-<div style="min-h-max">
+<div style="">
     <ModeWatcher defaultMode = {"dark"}/>
-	<Navbar {loggedIn}></Navbar>
+    <Navbar loggedIn={loggedIn}/>
 	<div class="container" style="padding: 50px 0 100px 0">
 	{@render children()}
 	</div>

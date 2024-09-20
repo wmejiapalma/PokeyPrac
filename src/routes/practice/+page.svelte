@@ -7,9 +7,13 @@ import type { PageData } from "../$types";
     let {game, userObjectives, form } = data;
 </script>
 
-<div class="max-w-screen-sm items-center justify-center flex flex-col mx-auto">
-    <UserInputForm gameData={game} data={form}/>
-    <ObjectivesTableDisplay objectives={userObjectives} caption="Recent Streaks"/>
+<div class=" items-center justify-center mx-auto grid grid-cols-2">
+    <div class = "col-start-1">
+        <UserInputForm class="shrink" gameData={game} data={form}/>
+    </div>
+    <div class="col-start-2">
+        <ObjectivesTableDisplay objectives={userObjectives} caption="Recent Streaks"/>
+    </div>
 </div>
 
 <style>

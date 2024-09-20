@@ -1,6 +1,6 @@
 import { fail, redirect, type Actions } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
-import { getUserObjectives, createUserObjective } from "$lib/db/usersData";
+import { getUserObjectivesDisplay, createUserObjective, getUserObjectivesDisplay } from "$lib/db/usersData";
 import { superValidate } from "sveltekit-superforms";
 import { objectiveFormSchema} from "./schema";
 import { zod } from "sveltekit-superforms/adapters";
@@ -10,15 +10,26 @@ import { invalidateAll } from "$app/navigation";
 export const load: PageServerLoad = async ({locals: {safeGetSession}, cookies }) => {
     let defaultGame = "1";
     
+    const getUserSession = async function () {
+        return await safeGetSession();
+    }    
+
     //Get who the user is
-    const userSession= await safeGetSession()
-    const userId = userSession?.session?.user.id;
-
     //Get the data we need to present before the page is loaded
-    const userObjectives = await getUserObjectives(userId);
-    const gameLevels = await getGameLevels(defaultGame);
-    const gameObjectives = await getGameObjectives(defaultGame);
 
+    async function getUserObjectives (){
+        const userSession = await getUserSession();
+        const userId = userSession?.session?.user.id;
+        return await getUserObjectivesDisplay(userId);
+    }
+    
+    const [userObjectives, gameLevels, gameObjectives] = await Promise.all([
+        getUserObjectives(),
+        getGameLevels(defaultGame),
+        getGameObjectives(defaultGame)
+    ]);
+    const userSession = await getUserSession();
+    const display = await getUserObjectivesDisplay(userSession?.session?.user.id);
     //Get the form the user will interact with
     const form = await superValidate(zod(objectiveFormSchema));
     return {
@@ -49,7 +60,6 @@ export const actions: Actions = {
             ...form.data
         }
         let res = await createUserObjective(objective);
-        console.log(res);
     },
     update: async({cookies, request}) =>{
 
