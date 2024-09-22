@@ -1,6 +1,7 @@
-<script>
+<script lang="ts">
 import "../app.css";
 import '../styles.css'
+
 import {ModeWatcher} from 'mode-watcher';
 import { invalidate } from '$app/navigation'
 import { onMount } from 'svelte'
@@ -16,16 +17,25 @@ onMount(() => {
         }
     })
     return () => data.subscription.unsubscribe()
-})</script><!-- src/routes/+layout.svelte -->
+    })
+</script><!-- src/routes/+layout.svelte -->
 
 
 <svelte:head>
 	<title>PokeyPrac</title>
 </svelte:head>
-<div style="">
+<div style="relative flex flex-co h-screen w-screen">
     <ModeWatcher defaultMode = {"dark"}/>
-    <Navbar loggedIn={loggedIn}/>
-	<div class="container" style="padding: 50px 0 100px 0">
-	{@render children()}
+	<div class="overflow-hidden">
+        <div class="flex-1">
+            <Navbar loggedIn={loggedIn}/>
+        </div>
+        <div class="flex-1 overflow-auto">
+            {@render children()}
+        </div>
 	</div>
 </div>
+
+
+<style>
+</style>

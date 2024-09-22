@@ -27,7 +27,6 @@ export async function getUserObjectivesDisplay(userId){
         .innerJoin(game_levels, eq(game_objectives.level_id, game_levels.id))
         .where(eq(user_objectives.user_id, userId))
         .orderBy(desc(user_objectives.date_created));
-        console.log(res);
         return res;
     } catch (error) {
         console.error('Error fetching user objectives:', error);

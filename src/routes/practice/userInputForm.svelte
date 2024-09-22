@@ -33,7 +33,6 @@
     }
     function filterObjectivesByLevel(levelId){
         let filtered = gameObjectives.filter((objective) => objective.level_id == levelId);
-        console.log("Filtered: ", filtered);
         return filtered;
     }
 </script>
