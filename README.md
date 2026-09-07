@@ -14,7 +14,7 @@ PokeyPrac is a work-in-progress project aimed at tracking Super Mario 64 speedru
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/yourusername/pokeyprac.git
+    git clone https://github.com/wmejiapalma/pokeyprac.git
     cd pokeyprac
     ```
 
